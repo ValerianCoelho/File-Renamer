@@ -2,9 +2,7 @@ import os
 from customtkinter import *
 from tkinter import filedialog
 
-def display():
-    print('Display')
-
+# Opens browsing window
 def browse():
     folderLocation = filedialog.askdirectory()
     folderInput.insert(0, folderLocation)
@@ -20,9 +18,11 @@ def rename():
         os.rename(file, newname)
         index = index + 1
 
+    # Changing the Rename Button to 'Done' for 1 Second
     renameBtn.configure(text = "Done")
     renameBtn.after(1000, lambda: renameBtn.configure(text = "Rename"))
 
+    # Resetting all the entry values to ''
     folderInput.delete(0, END)
     fileInput.delete(0, END)
     extensionInput.delete(0, END)
@@ -30,10 +30,9 @@ def rename():
 
 # UI ----------------------------------------------------------------------------------------------
 
-
-
 window = CTk()
 
+# Disabling resizing
 window.resizable(width = False, height = False)
 window.title(' File renamer')
 
@@ -52,7 +51,7 @@ browseBtn.grid(padx = 10, pady = 10, row = 1, column = 3)
 fileField = CTkLabel(mainFrame, text = "File Name : ", width = 100)
 fileField.grid(padx = (10, 0), pady = 10, row = 2, column = 0)
 
-fileInput = CTkEntry(mainFrame, placeholder_text = "eg: Stranger Things", width = 300)
+fileInput = CTkEntry(mainFrame, placeholder_text = "eg: Stranger Things episode", width = 300)
 fileInput.grid(padx = (0, 10), pady = 10, row = 2, column = 1, columnspan = 4)
 
 extensionField = CTkLabel(mainFrame, text = "Extension : ", width = 100)
@@ -69,9 +68,5 @@ startingIndexInput.grid(padx = (0, 10), pady = 10, row = 4, column = 1, columnsp
 
 renameBtn = CTkButton(mainFrame, command = rename, text = "Rename")
 renameBtn.grid(padx = 10, pady = (10, 20), row = 5, column = 0, columnspan = 4)
-
-# Backend -------------------------------------------------------------------------------------------
-
-
 
 window.mainloop()
